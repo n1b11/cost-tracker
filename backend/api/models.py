@@ -14,6 +14,6 @@ class Payment(models.Model):
     recipient = models.ForeignKey('User', on_delete=models.CASCADE, related_name='payments')
 
 class User(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, primary_key=True)
 
     
