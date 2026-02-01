@@ -17,10 +17,7 @@ class ExpenseListView(generics.ListAPIView):
             ).distinct()
         
         return Payment.objects.all()
-    def get_queryset(self): 
-        username = self.request.query_params.get('user', None)
-        return Expense.objects.filter(recipients=username)
-
+  
 class ExpenseCreateView(generics.CreateAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
