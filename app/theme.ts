@@ -1,11 +1,10 @@
-// theme.ts
 import { createTheme } from '@shopify/restyle';
 
 const theme = createTheme({
   colors: {
     background: '#000000ff',  
     text: '#ffffffff',
-    card: '#2f2f2fff',
+    card: '#201f1fff',
     red: '#FF3B30',
     green: '#34C759',
     purple: '#AF52DE',
@@ -35,6 +34,12 @@ const theme = createTheme({
       fontWeight: 'bold',
       color: 'text',
     },
+    red: {
+      color: 'red',
+    },
+    green: {
+      color: 'green',
+    },
     heading: {
       fontSize: 20,
       fontWeight: '600',
@@ -53,6 +58,16 @@ const theme = createTheme({
       fontSize: 16,
       fontWeight: '400',
       color: 'text',
+    },
+    owesHeader: {
+      fontSize: 32,
+      fontWeight: '600',
+      color: 'red',
+    },
+    owedHeader: {
+      fontSize: 32,
+      fontWeight: '600',
+      color: 'green',
     },
   },
 });

@@ -1,14 +1,27 @@
 import { useState } from "react";
 import { StyleSheet, TextInput, Button } from "react-native";
-import Box from "./Restyle/Box";
-import Text from "./Restyle/Text";
+import Box from "../Components/Restyle/Box";
+import Text from "../Components/Restyle/Text";
 import { Theme } from "../theme";
 import { useTheme } from "@shopify/restyle";
+import { useNavigation } from "@react-navigation/native";
+import { createOrSignInUser } from "../lib/api";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
 
     const [name, setName] = useState('');
     const theme = useTheme<Theme>();
+    const navigation = useNavigation<any>();
+    const handleLogin = async () => {
+        if (!name) {
+            alert('Please enter a name');
+            return;
+        }
+        await AsyncStorage.setItem('username', name);
+        createOrSignInUser(name);
+        navigation.navigate('Home'); 
+    }
     return (
         <Box style={styles.container} backgroundColor="background">
             <Box style={styles.inputContainer} backgroundColor="card">
@@ -21,7 +34,7 @@ export default function Login() {
                     />
                     </Box>
                 <Box style={styles.button} backgroundColor="purple">
-                <Button  color={theme.colors.text}title="Enter" onPress={() => {}} />
+                <Button  color={theme.colors.text}title="Enter" onPress={handleLogin} />
                 </Box>
             </Box>
         </Box>
