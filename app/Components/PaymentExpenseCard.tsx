@@ -31,7 +31,7 @@ export default function PaymentExpenseCard({ description, amount, author, type, 
             </Box>
             
             <Box style={styles.amountBox}>
-            <Text variant={positive ? "green" : "red"}>{positive ? '+' : '-'} ${amount}</Text>
+            <Text variant={positive ? "green" : "red"}> ${amount}</Text>
             
             {(author === name) && <Box backgroundColor="purple" padding="s" borderRadius="s">
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
