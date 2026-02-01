@@ -16,9 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
 from rest_framework.routers import DefaultRouter
-from .views import ExpenseListView, ExpenseCreateView, PaymentCreateView, PaymentListView, UserCreateOrSignInView, UserListView
 
 router = DefaultRouter()
 from django.contrib import admin
@@ -26,11 +24,13 @@ from django.urls import path
 from .views import (
     ExpenseListView, 
     ExpenseCreateView, 
+    ExpenseUpdateView,
     PaymentCreateView, 
+    PaymentUpdateView,
     PaymentListView, 
     UserCreateOrSignInView, 
     UserListView
-)
+    )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -40,4 +40,6 @@ urlpatterns = [
     path('payments/create/', PaymentCreateView.as_view(), name='payment-create'),
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/signin/', UserCreateOrSignInView.as_view(), name='user-signin'),
+    path('expenses/update/<int:pk>/', ExpenseUpdateView.as_view(), name='expense-update'),
+    path('payments/update/<int:pk>/', PaymentUpdateView.as_view(), name='payment-update'),
 ]

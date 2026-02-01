@@ -5,6 +5,7 @@ export interface Data {
     author: string;
     type: 'payment' | 'expense'
     date: string;
+    id?: number;
 }
 
 export interface PaymentData extends Data {

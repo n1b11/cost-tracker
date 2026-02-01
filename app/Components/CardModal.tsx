@@ -9,13 +9,15 @@ interface AddExpenseModalProps {
     onClose: () => void;
     onSubmit: (data: CardCreationData) => void;
     people: string[];
+    title: string;
+    defaultData?: CardCreationData;
 }
 
-export default function AddCardModal({ visible, onClose, onSubmit, people }: AddExpenseModalProps) {
-    const [description,setDescription] = useState('');
-    const [amount, setAmount] = useState('');
-    const [type, setType] = useState<'payment' | 'expense'>('expense');
-    const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
+export default function CardModal({ visible, onClose, onSubmit, people, title, defaultData }: AddExpenseModalProps) {
+    const [description,setDescription] = useState(defaultData?.description || '');
+    const [amount, setAmount] = useState(defaultData?.amount?.toString() || '');
+    const [type, setType] = useState<'payment' | 'expense'>(defaultData?.type || 'expense');
+    const [selectedPerson, setSelectedPerson] = useState<string | null>(defaultData?.recipient || null);
 
     const handleSubmit = () => {
         if (!description || !amount || !selectedPerson) {
@@ -47,7 +49,7 @@ export default function AddCardModal({ visible, onClose, onSubmit, people }: Add
             <Box style={styles.overlay}>
                 <Box style={styles.modalContainer} backgroundColor="card">                    
                     <Box style={styles.header}>
-                        <Text variant="heading" style={styles.title}>Add New Item</Text>
+                        <Text variant="heading" style={styles.title}>{title}</Text>
                         <TouchableOpacity onPress={onClose}>
                             <Text style={styles.closeButton}>✕</Text>
                         </TouchableOpacity>
