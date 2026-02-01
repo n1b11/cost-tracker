@@ -12,11 +12,11 @@ class ExpenseListView(generics.ListAPIView):
         username = self.request.query_params.get('user', None)
         
         if username:
-            return Payment.objects.filter(
-                Q(author__name=username) | Q(recipient__name=username)
+            return Expense.objects.filter(
+                Q(author__name=username) | Q(recipients__name=username)
             ).distinct()
         
-        return Payment.objects.all()
+        return Expense.objects.all()
   
 class ExpenseCreateView(generics.CreateAPIView):
     queryset = Expense.objects.all()
