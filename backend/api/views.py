@@ -24,8 +24,13 @@ class ExpenseListView(generics.ListAPIView):
 class ExpenseCreateView(generics.CreateAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
-
+class ExpenseUpdateView(generics.UpdateAPIView):
+    queryset = Expense.objects.all()
+    serializer_class = ExpenseSerializer
 class PaymentCreateView(generics.CreateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+class PaymentUpdateView(generics.UpdateAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
 

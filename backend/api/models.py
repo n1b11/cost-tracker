@@ -1,6 +1,7 @@
 from django.db import models
 
 class Expense(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('User', on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=100)
@@ -8,6 +9,7 @@ class Expense(models.Model):
     recipients = models.ManyToManyField('User', related_name='expenses')
 
 class Payment(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey('User', on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=100)
