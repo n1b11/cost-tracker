@@ -10,9 +10,9 @@ class UserSerializer(serializers.ModelSerializer):
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expense
-        fields = ['title', 'amount', 'recipients']
+        fields = ['author', 'amount', 'recipients','description']
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
-        fields = ['amount', 'author', 'recipient']
+        fields = ['amount', 'author', 'recipient','description']

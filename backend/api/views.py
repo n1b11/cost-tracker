@@ -8,8 +8,18 @@ from rest_framework import status
 class ExpenseListView(generics.ListAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
+    def get_queryset(self):
+        username = self.request.query_params.get('user', None)
+        
+        if username:
+            return Payment.objects.filter(
+                Q(author__name=username) | Q(recipient__name=username)
+            ).distinct()
+        
+        return Payment.objects.all()
     def get_queryset(self): 
-        return Expense.objects.filter(recipients=self.request.user.name)
+        username = self.request.query_params.get('user', None)
+        return Expense.objects.filter(recipients=username)
 
 class ExpenseCreateView(generics.CreateAPIView):
     queryset = Expense.objects.all()
@@ -22,10 +32,16 @@ class PaymentCreateView(generics.CreateAPIView):
 class PaymentListView(generics.ListAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
-    def get_queryset(self): 
-        return Payment.objects.filter(
-            Q(author=self.request.user) | Q(recipient=self.request.user)
-        ).distinct()
+    
+    def get_queryset(self):
+        username = self.request.query_params.get('user', None)
+        
+        if username:
+            return Payment.objects.filter(
+                Q(author__name=username) | Q(recipient__name=username)
+            ).distinct()
+        
+        return Payment.objects.all()
 
 class UserCreateOrSignInView(generics.CreateAPIView):
     queryset = User.objects.all()
